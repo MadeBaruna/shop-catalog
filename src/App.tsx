@@ -7,6 +7,7 @@ import { GlobalStyle } from './GlobalStyle';
 import Header from './components/Header';
 import Catalog from './pages/Catalog';
 import { client } from './graphql/client';
+import ProductDetail from './pages/ProductDetail';
 
 const Container = styled.div`
   max-width: 480px;
@@ -22,6 +23,7 @@ const App: React.FC = () => {
         <Container>
           <Switch>
             <Route exact path="/" component={Catalog} />
+            <Route exact path="/product/:id" component={ProductDetail} />
           </Switch>
         </Container>
       </Router>

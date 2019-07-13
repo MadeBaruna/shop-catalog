@@ -96,10 +96,8 @@ const Catalog: React.FC = () => (
     </Container>
     <Query<GetProducts>
       query={GetProductsQuery}
-      fetchPolicy="cache-and-network"
       variables={{
-        first: 1,
-        skip: 0
+        first: 1
       }}
     >
       {({ loading, data, error, fetchMore }) => {
@@ -114,14 +112,16 @@ const Catalog: React.FC = () => (
             onLoadMore={() =>
               fetchMore({
                 variables: {
-                  skip: data.products.length
+                  after: data.products
+                    ? data.products[data.products.length - 1].id
+                    : undefined
                 },
                 updateQuery: (prev, { fetchMoreResult }) => {
                   if (!fetchMoreResult) return prev;
                   return Object.assign({}, prev, {
                     products: [...prev.products, ...fetchMoreResult.products]
                   });
-                },
+                }
               })
             }
           />
