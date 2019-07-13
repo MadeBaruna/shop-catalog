@@ -29,6 +29,11 @@ const RowContent = styled.div`
   flex-direction: row;
 `;
 
+const EditorialImage = styled.img`
+  width: 100%;
+  height: auto;
+`;
+
 const Catalog: React.FC = () => (
   <div>
     <Container>
@@ -78,6 +83,7 @@ const Catalog: React.FC = () => (
       <div className="header">
         <h3>Editorial</h3>
       </div>
+      <EditorialImage src="https://imager-next.freetls.fastly.net/images/resized/480/assets-category-banner/250619_Sub-Category_DRESS.jpg" />
     </Container>
     <Container>
       <div className="header">
