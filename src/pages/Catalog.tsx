@@ -4,7 +4,10 @@ import { Button } from 'semantic-ui-react';
 import { Query } from 'react-apollo';
 import { GetCategories as GetCategoriesQuery } from '../graphql/queries/GetCategories';
 import { GetCategories } from '../graphql/queries/__generated__/GetCategories';
+import { GetProducts as GetProductsQuery } from '../graphql/queries/GetProducts';
+import { GetProducts } from '../graphql/queries/__generated__/GetProducts';
 import CategoryItem from '../components/CategoryItem';
+import ProductItem from '../components/ProductItem';
 
 const Container = styled.div`
   background-color: white;
@@ -90,6 +93,21 @@ const Catalog: React.FC = () => (
         <h3>Rekomendasi Produk</h3>
       </div>
     </Container>
+    <Query<GetProducts> query={GetProductsQuery}>
+      {({ loading, data, error }) => {
+        if (loading) {
+          return null;
+        }
+
+        if (error || !data) {
+          return null;
+        }
+
+        return data.products.map(product => (
+          <ProductItem {...product} pictureUrl={product.pictures[0].pictureUrl} />
+        ));
+      }}
+    </Query>
     <br />
   </div>
 );
