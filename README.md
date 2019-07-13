@@ -1,6 +1,6 @@
 # Shop Catalog
 
-Created with react and graphql (apollo), recreation of Sorabel product catalog 
+Created with react and graphql (apollo), recreation of Sorabel product catalog  
 To run locally, please run the server first https://github.com/MadeBaruna/shop-catalog-backend
 
 ## Running
