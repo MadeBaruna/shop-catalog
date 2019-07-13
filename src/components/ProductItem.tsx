@@ -20,7 +20,7 @@ const Detail = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  min-width: 0; 
+  min-width: 0;
 
   p {
     font-size: 16px;
@@ -67,7 +67,14 @@ const ProductItem: React.FC<IProps> = ({
   price,
   pictureUrl
 }) => (
-  <Link to={`/product/${id}`}>
+  <Link
+    to={{
+      pathname: `/product/${id}`,
+      state: {
+        title: name
+      }
+    }}
+  >
     <Div>
       <img src={pictureUrl} alt="gambar produk" />
       <DetailContainer>

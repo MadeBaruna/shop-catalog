@@ -97,12 +97,12 @@ const Catalog: React.FC = () => (
     <Query<GetProducts>
       query={GetProductsQuery}
       variables={{
-        first: 1
+        first: 4,
       }}
     >
       {({ loading, data, error, fetchMore }) => {
         if (error || !data) {
-          return <p>Gagal mengambil kategori :/</p>;
+          return <p>Gagal mengambil produk :/</p>;
         }
 
         return (

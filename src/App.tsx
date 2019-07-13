@@ -8,10 +8,11 @@ import Header from './components/Header';
 import Catalog from './pages/Catalog';
 import { client } from './graphql/client';
 import ProductDetail from './pages/ProductDetail';
+import Category from './pages/Category';
 
 const Container = styled.div`
   max-width: 480px;
-  margin: 0 auto;
+  margin: 56px auto 0 auto;
 `;
 
 const App: React.FC = () => {
@@ -24,6 +25,7 @@ const App: React.FC = () => {
           <Switch>
             <Route exact path="/" component={Catalog} />
             <Route exact path="/product/:id" component={ProductDetail} />
+            <Route exact path="/products/:id" component={Category} />
           </Switch>
         </Container>
       </Router>

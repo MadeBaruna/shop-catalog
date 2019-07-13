@@ -29,7 +29,14 @@ interface IProps {
 }
 
 const CategoryItem: React.FC<IProps> = ({ id, name, pictureUrl }) => (
-  <Link to={`/products/${id}`}>
+  <Link
+    to={{
+      pathname: `/products/${id}`,
+      state: {
+        title: name
+      }
+    }}
+  >
     <Div>
       <img src={pictureUrl} alt="gambar kategori" />
       <p>{name}</p>

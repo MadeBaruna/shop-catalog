@@ -33,5 +33,7 @@ export interface GetProducts {
 
 export interface GetProductsVariables {
   first?: number | null;
-  skip?: number | null;
+  after?: string | null;
+  category?: string | null;
+  priceRange?: number | null;
 }
