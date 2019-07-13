@@ -17,6 +17,10 @@ const Container = styled.div`
   border-bottom: 1px solid #eee;
   padding: 16px;
 
+  &.hidden {
+    display: none;
+  }
+
   h3 {
     margin-top: 4px;
     margin-bottom: 0;
@@ -49,13 +53,29 @@ const SubTitle = styled.p`
   color: #777;
 `;
 
-class ProductDetail extends Component<RouteComponentProps<{ id: string }>> {
+const TrySign = styled.p`
+  color: #30ac30;
+`;
+
+interface IState {
+  detailVisible: boolean;
+}
+
+class ProductDetail extends Component<
+  RouteComponentProps<{ id: string }>,
+  IState
+> {
+  state = {
+    detailVisible: false
+  };
+
   public componentDidMount() {
     window.scrollTo(0, 0);
   }
 
   public render() {
     const { match } = this.props;
+    const { detailVisible } = this.state;
 
     return (
       <Query<GetProduct>
@@ -79,9 +99,14 @@ class ProductDetail extends Component<RouteComponentProps<{ id: string }>> {
               <Picture src={product.pictures[0].pictureUrl} />
               <Container>
                 <h3>{product.name}</h3>
-                <h3 style={{ color: 'red' }}>
-                  {new Intl.NumberFormat('id-ID').format(product.price)}
-                </h3>
+                <div style={{ display: 'flex' }}>
+                  <h3 style={{ flex: 1, color: 'red' }}>
+                    {new Intl.NumberFormat('id-ID').format(product.price)}
+                  </h3>
+                  <TrySign>
+                    <Icon name="tag" /> Bisa Coba Dulu
+                  </TrySign>
+                </div>
               </Container>
               <Container>
                 <SubTitle>BAHAN UTAMA</SubTitle>
@@ -97,23 +122,24 @@ class ProductDetail extends Component<RouteComponentProps<{ id: string }>> {
                   BELI SEKARANG
                 </Button>
               </Container>
-              <ToggleContainer>
+              <ToggleContainer onClick={this.toggleVisible}>
                 <p>Detail & Ukuran</p>
                 <Icon name="chevron down" />
               </ToggleContainer>
-              <Container>
-                <SubTitle>DETAIL</SubTitle>
-                <p>
-                  {product.detail &&
-                    product.detail.split('\n').map((text, i) => (
+              {product.detail && (
+                <Container className={!detailVisible ? 'hidden' : ''}>
+                  <SubTitle>DETAIL</SubTitle>
+                  <p>
+                    {product.detail.split('\n').map((text, i) => (
                       <React.Fragment key={i}>
                         <span>{text}</span>
                         <br />
                       </React.Fragment>
                     ))}
-                </p>
-              </Container>
-              <Container>
+                  </p>
+                </Container>
+              )}
+              <Container className={!detailVisible ? 'hidden' : ''}>
                 <SubTitle>PANDUAN UKURAN</SubTitle>
                 <p>
                   {product.sizeGuide &&
@@ -128,7 +154,7 @@ class ProductDetail extends Component<RouteComponentProps<{ id: string }>> {
                       ))}
                 </p>
               </Container>
-              <Container>
+              <Container className={!detailVisible ? 'hidden' : ''}>
                 <SubTitle>PRODUK BISA DICOBA DAN DIKEMBALIKAN</SubTitle>
                 <p>YA</p>
               </Container>
@@ -139,6 +165,12 @@ class ProductDetail extends Component<RouteComponentProps<{ id: string }>> {
       </Query>
     );
   }
+
+  toggleVisible = () => {
+    this.setState({
+      detailVisible: !this.state.detailVisible
+    });
+  };
 }
 
 export default withRouter(ProductDetail);
