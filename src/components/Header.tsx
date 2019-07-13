@@ -7,6 +7,9 @@ const Div = styled.div`
   background: white;
   border-bottom: 1px solid #d9d9d9;
   height: 56px;
+  position: fixed;
+  width: 100%;
+  top: 0;
 `;
 
 const Content = styled.div`
@@ -43,7 +46,7 @@ const Header: React.FC<IProps> = ({ location, history, title }) => (
       {location.pathname !== '/' && (
         <Icon onClick={() => history.goBack()} name="arrow left" size="large" />
       )}
-      <Title>{title}</Title>
+      <Title>{location.state ? location.state.title : title}</Title>
     </Content>
   </Div>
 );
