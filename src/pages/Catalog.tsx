@@ -10,6 +10,7 @@ import CategoryItem from '../components/CategoryItem';
 import Loading from '../components/Loading';
 import ProductList from '../components/ProductList';
 import { Link } from 'react-router-dom';
+import SmallProductList from '../components/SmallProductList';
 
 const Container = styled.div`
   background-color: white;
@@ -57,6 +58,7 @@ const Catalog: React.FC = () => (
           </Button>
         </Link>
       </div>
+      <SmallProductList />
     </Container>
     <Container>
       <div className="header">
