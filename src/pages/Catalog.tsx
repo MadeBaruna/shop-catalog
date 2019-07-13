@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button } from 'semantic-ui-react';
+import { Query } from 'react-apollo';
+import { GetCategories as GetCategoriesQuery } from '../graphql/queries/GetCategories';
+import { GetCategories } from '../graphql/queries/__generated__/GetCategories';
+import CategoryItem from '../components/CategoryItem';
 
 const Container = styled.div`
   background-color: white;
@@ -20,6 +24,11 @@ const Container = styled.div`
   }
 `;
 
+const RowContent = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 const Catalog: React.FC = () => (
   <div>
     <Container>
@@ -34,11 +43,36 @@ const Catalog: React.FC = () => (
       <div className="header">
         <h3>Kategori</h3>
       </div>
+      <RowContent>
+        <Query<GetCategories> query={GetCategoriesQuery}>
+          {({ loading, data, error }) => {
+            if (loading) {
+              return null;
+            }
+
+            if (error || !data) {
+              return null;
+            }
+
+            return data.categories.map(category => (
+              <CategoryItem {...category} />
+            ));
+          }}
+        </Query>
+      </RowContent>
     </Container>
     <Container>
       <div className="header">
         <h3>Berdasarkan Harga</h3>
       </div>
+      <RowContent>
+        <Button fluid size="big" color="red">
+          Dibawah Rp 150.000
+        </Button>
+        <Button fluid size="big" color="red">
+          150.000 - 250.000
+        </Button>
+      </RowContent>
     </Container>
     <Container>
       <div className="header">

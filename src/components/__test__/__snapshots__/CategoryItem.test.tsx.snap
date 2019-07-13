@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders <CategoryItem /> 1`] = `
+<Link
+  to="/products/1"
+>
+  <styled.div>
+    <img
+      alt="gambar kategori"
+      src="http://a.jpg"
+    />
+    <p>
+      Midi Dress
+    </p>
+  </styled.div>
+</Link>
+`;

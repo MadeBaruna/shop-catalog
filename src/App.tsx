@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ApolloProvider } from 'react-apollo';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { GlobalStyle } from './GlobalStyle';
 import Header from './components/Header';
 import Catalog from './pages/Catalog';
+import { client } from './graphql/client';
 
 const Container = styled.div`
   max-width: 480px;
@@ -13,15 +15,17 @@ const Container = styled.div`
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <GlobalStyle />
-      <Header title="Dress Catalog" />
-      <Container>
-        <Switch>
-          <Route exact path="/" component={Catalog} />
-        </Switch>
-      </Container>
-    </Router>
+    <ApolloProvider client={client}>
+      <Router>
+        <GlobalStyle />
+        <Header title="Dress Catalog" />
+        <Container>
+          <Switch>
+            <Route exact path="/" component={Catalog} />
+          </Switch>
+        </Container>
+      </Router>
+    </ApolloProvider>
   );
 };
 
