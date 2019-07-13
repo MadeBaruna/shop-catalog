@@ -7,6 +7,11 @@ const Div = styled.div`
   display: flex;
   flex-direction: column;
   background: white;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 const DetailContainer = styled.div`
