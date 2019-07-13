@@ -1,7 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders <ProductItem /> 1`] = `
+exports[`renders <SmallProductItem /> 1`] = `
 <Link
+  style={
+    Object {
+      "width": "50%",
+    }
+  }
   to={
     Object {
       "pathname": "/product/asd",
@@ -21,26 +26,16 @@ exports[`renders <ProductItem /> 1`] = `
         <p>
           This is a rather long product name
         </p>
-        <span>
-          M, S, XL
-        </span>
-        <h3>
+        <p>
           120,000
-        </h3>
+        </p>
       </styled.div>
-      <styled.div>
-        <Icon
-          as="i"
-          color="grey"
-          name="heart outline"
-          size="large"
-        />
-        <Styled(Button)
-          color="red"
-        >
-          BELI
-        </Styled(Button)>
-      </styled.div>
+      <Icon
+        as="i"
+        color="grey"
+        name="heart outline"
+        size="large"
+      />
     </styled.div>
   </styled.div>
 </Link>

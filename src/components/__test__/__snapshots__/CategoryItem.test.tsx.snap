@@ -2,7 +2,14 @@
 
 exports[`renders <CategoryItem /> 1`] = `
 <Link
-  to="/products/1"
+  to={
+    Object {
+      "pathname": "/category/1",
+      "state": Object {
+        "title": "Midi Dress",
+      },
+    }
+  }
 >
   <styled.div>
     <img
