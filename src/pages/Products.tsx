@@ -5,13 +5,16 @@ import { GetProducts } from '../graphql/queries/__generated__/GetProducts';
 import ProductList from '../components/ProductList';
 import { withRouter, RouteComponentProps } from 'react-router';
 
-const ProductsPage: React.FC<RouteComponentProps<{category: string}>> = ({ match }) => (
+const ProductsPage: React.FC<
+  RouteComponentProps<{ categoryId: string; price: string }>
+> = ({ match }) => (
   <div>
     <Query<GetProducts>
       query={GetProductsQuery}
       variables={{
         first: 4,
-        category: match.params.category,
+        category: match.params.categoryId,
+        priceRange: Number(match.params.price)
       }}
     >
       {({ loading, data, error, fetchMore }) => {

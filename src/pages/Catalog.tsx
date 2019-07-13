@@ -9,6 +9,7 @@ import { GetProducts } from '../graphql/queries/__generated__/GetProducts';
 import CategoryItem from '../components/CategoryItem';
 import Loading from '../components/Loading';
 import ProductList from '../components/ProductList';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   background-color: white;
@@ -43,9 +44,18 @@ const Catalog: React.FC = () => (
     <Container>
       <div className="header">
         <h3>Terbaru</h3>
-        <Button basic color="red">
-          Lihat Semua
-        </Button>
+        <Link
+          to={{
+            pathname: '/products',
+            state: {
+              title: 'Semua Produk'
+            }
+          }}
+        >
+          <Button basic color="red">
+            Lihat Semua
+          </Button>
+        </Link>
       </div>
     </Container>
     <Container>
@@ -75,12 +85,32 @@ const Catalog: React.FC = () => (
         <h3>Berdasarkan Harga</h3>
       </div>
       <RowContent>
-        <Button fluid size="big" color="red">
-          Dibawah Rp 150.000
-        </Button>
-        <Button fluid size="big" color="red">
-          150.000 - 250.000
-        </Button>
+        <Link
+          style={{ flex: 1, marginRight: 4 }}
+          to={{
+            pathname: '/price/0',
+            state: {
+              title: 'Dibawah Rp 150.000'
+            }
+          }}
+        >
+          <Button fluid size="big" color="red">
+            Dibawah Rp 150.000
+          </Button>
+        </Link>
+        <Link
+          style={{ flex: 1, marginLeft: 4 }}
+          to={{
+            pathname: '/price/1',
+            state: {
+              title: '150.000 - 250.000'
+            }
+          }}
+        >
+          <Button fluid size="big" color="red">
+            150.000 - 250.000
+          </Button>
+        </Link>
       </RowContent>
     </Container>
     <Container>
@@ -97,7 +127,7 @@ const Catalog: React.FC = () => (
     <Query<GetProducts>
       query={GetProductsQuery}
       variables={{
-        first: 4,
+        first: 4
       }}
     >
       {({ loading, data, error, fetchMore }) => {

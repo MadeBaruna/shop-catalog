@@ -31,7 +31,7 @@ interface IProps {
 const CategoryItem: React.FC<IProps> = ({ id, name, pictureUrl }) => (
   <Link
     to={{
-      pathname: `/products/${id}`,
+      pathname: `/category/${id}`,
       state: {
         title: name
       }
