@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Icon as SemanticIcon } from 'semantic-ui-react'
+import { Icon as SemanticIcon } from 'semantic-ui-react';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 const Div = styled.div`
   background: white;
@@ -15,28 +16,34 @@ const Content = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding: 0 14px;
 `;
 
 const Title = styled.h3`
   color: #525252;
   margin: 0;
   flex: 1;
+  padding-left: 8px;
 `;
 
 const Icon = styled(SemanticIcon)`
   color: #525252;
   margin: 0;
-  padding: 0 30px 0 10px;
+  padding: 0 5px;
 `;
 
-const Header: React.FC = () => (
+interface IProps extends RouteComponentProps<{}> {
+  title: string;
+}
+
+const Header: React.FC<IProps> = ({ location, title }) => (
   <Div>
     <Content>
-      <Icon name="arrow left" size="large" />
-      <Title>Title</Title>
-      <Icon name="search" size="large" />   
+      {location.pathname !== '/' && <Icon name="arrow left" size="large" />}
+      <Title>{title}</Title>
+      <Icon name="search" size="large" />
     </Content>
   </Div>
 );
 
-export default Header;
+export default withRouter(Header);
