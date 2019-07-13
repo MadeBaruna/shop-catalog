@@ -5,7 +5,7 @@ import { GetProducts } from '../graphql/queries/__generated__/GetProducts';
 import ProductList from '../components/ProductList';
 import { withRouter, RouteComponentProps } from 'react-router';
 
-const Category: React.FC<RouteComponentProps<{category: string}>> = ({ match }) => (
+const ProductsPage: React.FC<RouteComponentProps<{category: string}>> = ({ match }) => (
   <div>
     <Query<GetProducts>
       query={GetProductsQuery}
@@ -46,4 +46,4 @@ const Category: React.FC<RouteComponentProps<{category: string}>> = ({ match }) 
   </div>
 );
 
-export default withRouter(Category);
+export default withRouter(ProductsPage);
