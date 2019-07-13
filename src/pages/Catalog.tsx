@@ -85,11 +85,12 @@ const Catalog: React.FC = () => (
       </div>
       <EditorialImage src="https://imager-next.freetls.fastly.net/images/resized/480/assets-category-banner/250619_Sub-Category_DRESS.jpg" />
     </Container>
-    <Container>
+    <Container style={{ marginBottom: 0 }}>
       <div className="header">
         <h3>Rekomendasi Produk</h3>
       </div>
     </Container>
+    <br />
   </div>
 );
 

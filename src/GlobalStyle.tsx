@@ -5,7 +5,7 @@ export const GlobalStyle = createGlobalStyle`
     background-color: rgb(232, 232, 232) !important;
   }
 
-  h1, h2, h3, h4, h5, p {
+  h1, h2, h3, h4, h5, p, span {
     color: #525252;
   }
 `;

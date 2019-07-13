@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders <ProductItem /> 1`] = `
+<Link
+  to="/product/asd"
+>
+  <styled.div>
+    <img
+      alt="gambar produk"
+      src="https://image.jpg"
+    />
+    <styled.div>
+      <styled.div>
+        <p>
+          This is a rather long product name
+        </p>
+        <span>
+          M, S, XL
+        </span>
+        <h3>
+          120,000
+        </h3>
+      </styled.div>
+      <styled.div>
+        <Icon
+          as="i"
+          color="grey"
+          name="heart outline"
+          size="large"
+        />
+        <Styled(Button)
+          color="red"
+        >
+          BELI
+        </Styled(Button)>
+      </styled.div>
+    </styled.div>
+  </styled.div>
+</Link>
+`;
