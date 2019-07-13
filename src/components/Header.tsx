@@ -30,18 +30,20 @@ const Icon = styled(SemanticIcon)`
   color: #525252;
   margin: 0;
   padding: 0 5px;
+  cursor: pointer;
 `;
 
 interface IProps extends RouteComponentProps<{}> {
   title: string;
 }
 
-const Header: React.FC<IProps> = ({ location, title }) => (
+const Header: React.FC<IProps> = ({ location, history, title }) => (
   <Div>
     <Content>
-      {location.pathname !== '/' && <Icon name="arrow left" size="large" />}
+      {location.pathname !== '/' && (
+        <Icon onClick={() => history.goBack()} name="arrow left" size="large" />
+      )}
       <Title>{title}</Title>
-      <Icon name="search" size="large" />
     </Content>
   </Div>
 );

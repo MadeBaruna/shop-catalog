@@ -30,3 +30,8 @@ export interface GetProducts_products {
 export interface GetProducts {
   products: GetProducts_products[];
 }
+
+export interface GetProductsVariables {
+  first?: number | null;
+  skip?: number | null;
+}

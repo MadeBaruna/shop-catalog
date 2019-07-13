@@ -7,7 +7,8 @@ import { GetCategories } from '../graphql/queries/__generated__/GetCategories';
 import { GetProducts as GetProductsQuery } from '../graphql/queries/GetProducts';
 import { GetProducts } from '../graphql/queries/__generated__/GetProducts';
 import CategoryItem from '../components/CategoryItem';
-import ProductItem from '../components/ProductItem';
+import Loading from '../components/Loading';
+import ProductList from '../components/ProductList';
 
 const Container = styled.div`
   background-color: white;
@@ -55,15 +56,15 @@ const Catalog: React.FC = () => (
         <Query<GetCategories> query={GetCategoriesQuery}>
           {({ loading, data, error }) => {
             if (loading) {
-              return null;
+              return <Loading />;
             }
 
             if (error || !data) {
-              return null;
+              return <p>Gagal mengambil kategori :/</p>;
             }
 
             return data.categories.map(category => (
-              <CategoryItem {...category} />
+              <CategoryItem key={category.id} {...category} />
             ));
           }}
         </Query>
@@ -93,19 +94,38 @@ const Catalog: React.FC = () => (
         <h3>Rekomendasi Produk</h3>
       </div>
     </Container>
-    <Query<GetProducts> query={GetProductsQuery}>
-      {({ loading, data, error }) => {
-        if (loading) {
-          return null;
-        }
-
+    <Query<GetProducts>
+      query={GetProductsQuery}
+      fetchPolicy="cache-and-network"
+      variables={{
+        first: 1,
+        skip: 0
+      }}
+    >
+      {({ loading, data, error, fetchMore }) => {
         if (error || !data) {
-          return null;
+          return <p>Gagal mengambil kategori :/</p>;
         }
 
-        return data.products.map(product => (
-          <ProductItem {...product} pictureUrl={product.pictures[0].pictureUrl} />
-        ));
+        return (
+          <ProductList
+            loading={loading}
+            products={data.products}
+            onLoadMore={() =>
+              fetchMore({
+                variables: {
+                  skip: data.products.length
+                },
+                updateQuery: (prev, { fetchMoreResult }) => {
+                  if (!fetchMoreResult) return prev;
+                  return Object.assign({}, prev, {
+                    products: [...prev.products, ...fetchMoreResult.products]
+                  });
+                },
+              })
+            }
+          />
+        );
       }}
     </Query>
     <br />
