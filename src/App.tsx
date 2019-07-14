@@ -9,6 +9,7 @@ import Catalog from './pages/Catalog';
 import { client } from './graphql/client';
 import ProductDetail from './pages/ProductDetail';
 import ProductsPage from './pages/Products';
+import BuyPopup from './components/BuyPopup';
 
 const Container = styled.div`
   max-width: 480px;
@@ -29,6 +30,7 @@ const App: React.FC = () => {
             <Route exact path="/price/:price" component={ProductsPage} />
             <Route exact path="/products" component={ProductsPage} />
           </Switch>
+          <BuyPopup />
         </Container>
       </Router>
     </ApolloProvider>

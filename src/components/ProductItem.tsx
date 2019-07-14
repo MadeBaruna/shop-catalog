@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useGlobal } from 'reactn';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Icon, Button } from 'semantic-ui-react';
+import { GetProduct_product } from '../graphql/queries/__generated__/GetProduct';
 
 const Div = styled.div`
   display: flex;
@@ -55,33 +56,25 @@ const BuyButton = styled(Button)`
   margin-left: 8px !important;
 `;
 
-interface IProps {
-  id: string;
-  name: string;
-  pictureUrl: string;
-  size: string;
-  price: number;
-}
-
 const priceFormat = new Intl.NumberFormat('id-ID');
 
-const ProductItem: React.FC<IProps> = ({
-  id,
-  name,
-  size,
-  price,
-  pictureUrl
-}) => (
-  <Link
-    to={{
-      pathname: `/product/${id}`,
-      state: {
-        title: name
-      }
-    }}
-  >
+const ProductItem: React.FC<GetProduct_product> = product => {
+  const [, setBuyPopupVisible] = useGlobal('buyPopupVisible');
+  const [, setBuyPopupProduct] = useGlobal('buyPopupProduct');
+  const { id, pictures, name, size, price } = product;
+
+  return (
     <Div>
-      <img src={pictureUrl} alt="gambar produk" />
+      <Link
+        to={{
+          pathname: `/product/${id}`,
+          state: {
+            title: name
+          }
+        }}
+      >
+        <img src={pictures[0].pictureUrl} alt="gambar produk" />
+      </Link>
       <DetailContainer>
         <Detail>
           <p>{name}</p>
@@ -90,11 +83,19 @@ const ProductItem: React.FC<IProps> = ({
         </Detail>
         <ButtonContainer>
           <Icon name="heart outline" color="grey" size="large" />
-          <BuyButton color="red">BELI</BuyButton>
+          <BuyButton
+            color="red"
+            onClick={() => {
+              setBuyPopupProduct(product);
+              setBuyPopupVisible(true);
+            }}
+          >
+            BELI
+          </BuyButton>
         </ButtonContainer>
       </DetailContainer>
     </Div>
-  </Link>
-);
+  );
+};
 
 export default ProductItem;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'reactn';
 import styled from 'styled-components';
 import { Query } from 'react-apollo';
 import { GetProduct as GetProductQuery } from '../graphql/queries/GetProduct';
@@ -118,7 +118,16 @@ class ProductDetail extends Component<
               </Container>
               <Container style={{ display: 'flex' }}>
                 <Button>SIMPAN</Button>
-                <Button color="red" fluid>
+                <Button
+                  color="red"
+                  fluid
+                  onClick={() => {
+                    this.setGlobal({
+                      buyPopupProduct: data.product,
+                      buyPopupVisible: true
+                    });
+                  }}
+                >
                   BELI SEKARANG
                 </Button>
               </Container>

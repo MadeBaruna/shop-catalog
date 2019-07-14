@@ -47,7 +47,6 @@ class ProductList extends Component<IProps> {
           <ProductItem
             key={product.id}
             {...product}
-            pictureUrl={product.pictures[0].pictureUrl}
           />
         ))}
         {loading && <Loading />}
