@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { debounce } from 'debounce';
 
 import { GetProducts_products } from '../graphql/queries/__generated__/GetProducts';
 import ProductItem from './ProductItem';
@@ -19,7 +20,7 @@ class ProductList extends Component<IProps> {
     window.removeEventListener('scroll', this.onScroll, false);
   }
 
-  onScroll = () => {
+  onScroll = debounce(() => {
     const height = Math.max(
       document.body.scrollHeight,
       document.body.clientHeight,
@@ -29,25 +30,22 @@ class ProductList extends Component<IProps> {
       document.documentElement.clientHeight
     );
 
-    if (window.innerHeight + document.documentElement.scrollTop !== height)
+    if (window.innerHeight + document.documentElement.scrollTop <= height - 200)
       return;
     this.props.onLoadMore();
-  };
+  }, 200);
 
   public render() {
     const { loading, products } = this.props;
 
     if (!products && loading) {
-      return <Loading />
+      return <Loading />;
     }
 
     return (
       <div>
         {products.map(product => (
-          <ProductItem
-            key={product.id}
-            {...product}
-          />
+          <ProductItem key={product.id} {...product} />
         ))}
         {loading && <Loading />}
       </div>
